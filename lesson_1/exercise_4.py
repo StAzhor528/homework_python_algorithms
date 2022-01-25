@@ -16,65 +16,48 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
-# 1-е решение. Сложность O(n) - линейная. Исходные данные - список словарей.
-users_data_lst_1 = [{'login': 'aaa', 'password': 'aaa', 'activate': True},
-                    {'login': 'bbb', 'password': 'bbb', 'activate': False},
-                    {'login': 'ccc', 'password': 'ccc', 'activate': True}]
+
+# 1-е решение. Сложность O(n) - линейная.
+
+def autentification_1(users, name, password):
+    for k, v in users.items():
+        if k == name:
+            if v['password'] == password and v['activate']:
+                return f'Добро пожаловать {name}!'
+            elif v['password'] == password and not v['activate']:
+                return 'Учетная запись не активирована! Пройдите аутентификацию!'
+            elif v['password'] != password:
+                return 'Неверный пароль!'
+    return f'Пользователя {name} не существует!'
 
 
-def autentification_1(user_login):
-    user_in_lst = False
-    for user_data in users_data_lst_1:  # O(n)
-        if not user_in_lst:
-            if user_data['login'] == user_login and user_data['activate']:
-                return f'Добро пожаловать {user_login}!'
-                user_in_lst = True
-                break
-            elif user_data['login'] == user_login and not user_data['activate']:
-                print(f'Учетная запись не активирована! Пройдите аутентификацию!')
-                while True:  # O(1)
-                    user_password = input('Введите пароль: ')
-                    if user_password == user_data['password']:
-                        return f'Добро пожаловать {user_login}!'
-                        user_in_lst = True
-                        break
-                    else:
-                        print('Неверный пароль! Повторите попытку!')
-                break
-    if not user_in_lst:
-        return f'Пользователя {user_login} не существует!'
+# 2-е решение. Сложность O(n) - константная. Исходные данные - словарь.
 
 
-# 2-е решение. Сложность O(1) - константная. Исходные данные - словарь.
-users_data_lst_2 = {'aaa': {'password': 'aaa', 'activate': True},
-                    'bbb': {'password': 'bbb', 'activate': False},
-                    'ccc': {'password': 'ccc', 'activate': True}}
-
-
-def autentification_2(user_login):
-    if user_login in list(users_data_lst_2.keys()):  # O(1)
-        if users_data_lst_2[user_login]['activate']:
-            return f'Добро пожаловать {user_login}!'
-        else:
-            print(f'Учетная запись не активирована! Пройдите аутентификацию!')
-            while True:  # O(1)
-                user_password = input('Введите пароль: ')
-                if user_password == users_data_lst_2[user_login]['password']:
-                    return f'Добро пожаловать {user_login}!'
-                    break
-                else:
-                    print('Неверный пароль! Повторите попытку!')
+def autentification_2(users, name, password):
+    if users.get(name):
+        if users[name]['password'] == password and users[name]['activate']:
+            return f'Добро пожаловать {name}!'
+        elif users[name]['password'] == password and not users[name]['activate']:
+            return 'Учетная запись не активирована! Пройдите аутентификацию!'
+        elif users[name]['password'] != password:
+            return 'Неверный пароль!'
     else:
-        return f'Пользователя {user_login} не существует!'
+        return f'Пользователя {name} не существует!'
+
 
 if __name__ == '__main__':
-    print(autentification_1('aaa'))
-    print(autentification_1('bbb'))
-    print(autentification_1('ccc'))
-    print(autentification_1('ddd'))
+    users_data_lst = {'aaa': {'password': 'aaa', 'activate': True},
+                      'bbb': {'password': 'bbb', 'activate': False},
+                      'ccc': {'password': 'ccc', 'activate': True}}
 
-    print(autentification_2('aaa'))
-    print(autentification_2('bbb'))
-    print(autentification_2('ccc'))
-    print(autentification_2('ddd'))
+    print(autentification_1(users_data_lst, 'aaa', 'aaa'))
+    print(autentification_1(users_data_lst, 'bbb', 'bbb'))
+    print(autentification_1(users_data_lst, 'ccc', 'fff'))
+    print(autentification_1(users_data_lst, 'ddd', 'ddd'))
+
+    print(autentification_2(users_data_lst, 'aaa', 'aaa'))
+    print(autentification_2(users_data_lst, 'bbb', 'bbb'))
+    print(autentification_2(users_data_lst, 'ccc', 'fff'))
+    print(autentification_2(users_data_lst, 'ddd', 'ddd'))
 # Итог: лучше использовать 2-е решение, так как сложность наименьшая из возможных.
