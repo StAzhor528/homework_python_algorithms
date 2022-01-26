@@ -11,17 +11,17 @@
 """
 
 
-def sum(n):
+def left_sum(n):  # Вычисление суммы посредством рекурсии.
     if n == 1:
         return n
     else:
-        return n + sum(n - 1)
+        return n + left_sum(n - 1)
 
 
-def check(n):
+def check(n):  # Проверка посредством рекурсии. Если проверка прошла, то вернет True.
     if n == 0:
         return True
-    if sum(n) != n * (n + 1) / 2:
+    if left_sum(n) != n * (n + 1) / 2:
         return False
     return check(n - 1)
 

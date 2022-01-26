@@ -18,11 +18,8 @@
 
 
 def in_reverse(num):
-    if num < 10:
-        return num
-    else:
-        return str(num % 10) + str(in_reverse(num // 10))
+    return num if num < 10 else str(num % 10) + str(in_reverse(num // 10))
 
 
 if __name__ == '__main__':
-    print(int(in_reverse(1230)))
+    print(in_reverse(1230))

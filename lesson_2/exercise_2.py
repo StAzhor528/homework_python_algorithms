@@ -15,21 +15,16 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
-even = 0
-odd = 0
 
-
-def even_odd(num):
-    global even
-    global odd
+def even_odd(num, even=0, odd=0):
     if num == 0:
-        return (even, odd)
+        return even, odd
     if num % 2 == 0:
         even += 1
     else:
         odd += 1
-    return even_odd(num // 10)
+    return even_odd(num // 10, even, odd)
 
 
 if __name__ == '__main__':
-    print(even_odd(1236666666777))
+    print(even_odd(1236666666777111))

@@ -17,22 +17,15 @@
 Допускается исп-е встроенных ф-ций
 """
 
-i = 0
 
-
-def simbols_ascii(num_from, num_to, num_column):
-    global i
-    if num_from == num_to:
-        return str(num_from) + ' - ' + chr(num_to)
-    else:
-        if i % num_column == 0:
-            i += 1
-            return '\n' + str(num_from) + ' - ' + chr(num_from) + ' ' + simbols_ascii(num_from + 1, num_to, num_column)
-
-        else:
-            i += 1
-            return str(num_from) + ' - ' + chr(num_from) + ' ' + simbols_ascii(num_from + 1, num_to, num_column)
+def simbols_ascii(ascii_num=32):
+    if ascii_num == 128:
+        return True
+    print(f'{ascii_num} - {chr(ascii_num)}', end=" ")
+    if (ascii_num - 31) % 10 == 0:
+        print('') # Так как print сам добавляет \n, то дублирующий \n просто убрал.
+    simbols_ascii(ascii_num + 1)
 
 
 if __name__ == '__main__':
-    print(simbols_ascii(32, 127, 10))
+    simbols_ascii()

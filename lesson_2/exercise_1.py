@@ -29,38 +29,43 @@ def math_operation():
     sign = input("Введите операцию (+, -, *, / или 0 для выхода): ")
     if sign == '0':
         return
-    elif sign in ['+', '-', '*', '/']:
-        first_num = input("Введите первое число: ")
-        if not first_num.isdigit():
-            print("Вы вместо числа ввели строку (((. Исправьтесь!")
-            return math_operation()
-        second_num = input("Введите второе число: ")
-        if not second_num.isdigit():
-            print("Вы вместо числа ввели строку (((. Исправьтесь!")
-            return math_operation()
-        if sign == '+':
-            result = int(first_num) + int(second_num)
-            print(f'Ваш результат {result}')
-            return math_operation()
-        if sign == '-':
-            result = int(first_num) - int(second_num)
-            print(f'Ваш результат {result}')
-            return math_operation()
-        if sign == '*':
-            result = int(first_num) * int(second_num)
-            print(f'Ваш результат {result}')
-            return math_operation()
-        if sign == '/':
-            if int(second_num) == 0:
-                print('Нельзя делить на ноль! Повторите ввод!')
-                return math_operation()
-            else:
-                result = int(first_num) / int(second_num)
-                print(f'Ваш результат {result}')
-                return math_operation()
     else:
-        print('Неверный ввод! Попробуйте еще раз!')
-        return math_operation()
+        if sign in '+-*/':
+            try:
+                first_num = int(input("Введите первое число: "))
+                second_num = int(input("Введите второе число: "))
+
+                if sign == '+':
+                    result = first_num + second_num
+                    print(f'Ваш результат {result}')
+                    return math_operation()
+
+                if sign == '-':
+                    result = first_num - second_num
+                    print(f'Ваш результат {result}')
+                    return math_operation()
+
+                if sign == '*':
+                    result = first_num * second_num
+                    print(f'Ваш результат {result}')
+                    return math_operation()
+
+                if sign == '/':
+                    try:
+                        result = int(first_num) / int(second_num)
+                    except ZeroDivisionError:
+                        print('Деление на ноль невозможно!')
+                    else:
+                        print(f'Ваш результат {result}')
+                    finally:
+                        return math_operation()
+            except ValueError:
+                print("Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+            finally:
+                return math_operation()
+        else:
+            print('Неверный ввод! Попробуйте еще раз!')
+            return math_operation()
 
 
 if __name__ == '__main__':
