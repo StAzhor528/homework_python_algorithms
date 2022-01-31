@@ -31,19 +31,19 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=1))
 print("Перевернутое число от 10000 до 1000000 - ", recursive_reverse(num_100))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=1))
 print("Перевернутое число от 1000000 до 10000000 - ", recursive_reverse(num_1000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=1))
 print("Перевернутое число от 100000000 до 10000000000000 - ", recursive_reverse(num_10000))
 
 
@@ -73,22 +73,23 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=1))
 print("Перевернутое число от 10000 до 1000000 - ", recursive_reverse_mem(num_100))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=1))
 print("Перевернутое число от 1000000 до 10000000 - ", recursive_reverse_mem(num_1000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=1))
 print("Перевернутое число от 100000000 до 10000000000000 - ", recursive_reverse_mem(num_10000))
 
 # Для наглядности добавил в код программы вывод исходных и полученных чисел.
-# Вывод: в данной задаче мемоизация наобходима, так как без неё мы получаем неправильный ответ
-# (в конец числа добавляется 0). Так же с мемоизацией время выполнения функции быстрее в 10-20 раз,
-# если смотреть на получившиеся значения времени.
+# Так же number для timeit сделал равным 1.
+# Вывод: в данной задаче мемоизация ненужна. С мемоизацией время выполнения функции медленнее.
+# Предположение: помимо расчетов функция с мемоизацией добавляет в словарь значения расчитанных функций,
+# что увеличивает время работы.
