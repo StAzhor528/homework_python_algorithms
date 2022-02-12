@@ -32,13 +32,13 @@ def cube_nums_1(lst):
     print('Список кубов нечетный чисел -', numbers_cube)
     general_sum = 0
     for number in numbers_cube:
-        sum = 0
+        result = 0
         number_test = number
         while number_test:
             last_num = number_test % 10
             number_test = number_test // 10
-            sum = sum + last_num
-        if sum % 7 == 0:
+            result += last_num
+        if result % 7 == 0:
             general_sum = general_sum + number
 
     print('Сумма чисел из этого списка, сумма цифр которых делится на 7 =', general_sum)
@@ -50,13 +50,13 @@ def cube_nums_1(lst):
 
     general_sum = 0
     for number in numbers_cube:
-        sum = 0
+        result = 0
         number_test = number
         while number_test:
             last_num = number_test % 10
             number_test = number_test // 10
-            sum = sum + last_num
-        if sum % 7 == 0:
+            result += last_num
+        if result % 7 == 0:
             general_sum = general_sum + number
     print('Сумма чисел из нового списка, сумма цифр которых делится на 7 =', general_sum)
     return
@@ -84,5 +84,4 @@ if __name__ == '__main__':
     print(f'Затраченная память исходного кода - {mem_diff_1} Mib')
     print(f'Затраченная память после оптимизации - {mem_diff_2} Mib')
 
-# В данном примере для оптимизации воспользовался переводом циклов for в "списковые включения". Так же в некоторых
-# местах воспользовался функцией map. Результат - сильное уменьшение используемой памяти.
+# В данном примере воспользовался функцией map. Результат - сильное уменьшение используемой памяти.

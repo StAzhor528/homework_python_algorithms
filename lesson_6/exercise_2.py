@@ -14,19 +14,22 @@ from memory_profiler import profile
 
 
 @profile
-def even_odd(num, even=0, odd=0):
-    if num == 0:
-        return even, odd
-    if num % 2 == 0:
-        even += 1
-    else:
-        odd += 1
-    return even_odd(num // 10, even, odd)
+def wrapper(number):
+    def even_odd(num, even=0, odd=0):
+        if num == 0:
+            return even, odd
+        if num % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd(num // 10, even, odd)
+    return even_odd(number)
 
 
 if __name__ == '__main__':
-    even_odd(1)
+    print(wrapper(145))
+
 
 # Проблемма заключается в том, что при вызове функции из функции срабатывает декоратор столько раз,
-# сколько будет вызываться функция. Соответственно нам необходимо задать аргумент функции такой,
-# чтобы рекурсия отработала 1 шаг, а далее сработало условие на выход. В данной задаче это любое число от 1 до 9.
+# сколько будет вызываться функция. Необходимо обернуть изначальную рекурсивную функцию и профилировать обертку.
+
